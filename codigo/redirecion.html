@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publicidad</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      text-align: center;
+    }
+    .redirect-container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+    }
+    .redirect-container img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+    }
+    .redirect-container h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .redirect-container p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .redirect-container a {
+      color: #007bff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="redirect-container">
+    <img src="path/to/your/logo.png" alt="Publicidad">
+    <h1>¡Gracias por tu interés!</h1>
+    <p>Estamos redirigiéndote al contenido del anuncio.</p>
+    <p>Por favor, espera un momento...</p>
+    <p>Vuelve a la página anterior</p>
+  </div>
+
+  <script>
+    // Obtener el parámetro de URL que contiene el enlace de redirección
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectTo = urlParams.get('url');
+
+    // Redirigir automáticamente después de 5 segundos
+    if (redirectTo) {
+      document.getElementById('manual-link').href = redirectTo;
+      setTimeout(() => {
+        window.location.href = redirectTo;
+      }, 5000);
+    } else {
+      document.getElementById('manual-link').textContent = 'Enlace no válido';
+    }
+  </script>
+</body>
+</html>

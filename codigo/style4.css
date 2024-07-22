@@ -1,0 +1,130 @@
+/* General */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  flex: 1;
+}
+
+/* Services Header */
+.services-header {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.services-header h2 {
+  font-size: 2em;
+  color: #333;
+  font-family: Arial black;
+}
+
+.services-header p {
+  font-size: 1.2em;
+  color: #666;
+  font-family: Arial black;
+}
+
+/* Services Container */
+.services-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px auto;
+}
+
+.service-item {
+  flex: 1 1 calc(50% - 40px);
+  margin: 20px;
+  text-align: center;
+}
+
+.service-image {
+  width: 100%;
+  max-width: 300px;
+  height: 200px;
+  object-fit: cover; /* Asegura que la imagen cubra el área disponible */
+  margin-bottom: 10px;
+}
+
+.service-text {
+  font-size: 1.5em;
+  color: #333;
+}
+
+/* Footer */
+.footer {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.footer .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.footer .text-muted {
+  color: #bbb;
+}
+
+/* Navbar */
+.navbar {
+  margin-bottom: 20px;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #fff !important;
+}
+
+/* Custom Button Styles for Navbar */
+.navbar-nav .nav-link {
+  color: #fff !important;
+  transition: color 0.3s, background-color 0.3s;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin: 0 5px;
+  background-color: #007bff; /* Background color for buttons */
+}
+
+.navbar-nav .nav-link:hover {
+  color: #fff !important;
+  background-color: #0056b3; /* Darker shade for hover */
+}
+
+/* Modal Styles */
+.modal-content {
+  text-align: center;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ad-text {
+  font-size: 2em;
+  font-family: Arial black;
+  margin-top: 10px;
+  color: black;
+  font-weight: bold;
+}
+
+.highlight {
+  color: red; /* Puedes ajustar el color a tu preferencia */
+}

@@ -1,0 +1,141 @@
+/* General */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  flex: 1;
+}
+
+/* Heading */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Paragraph */
+p {
+  text-align: center;
+  color: #666;
+}
+
+/* Ad Banner */
+.ad-banner {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.ad-banner img {
+  max-width: 100%;
+  height: auto;
+}
+
+.ad-text {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  font-family: arial black;
+  font-size: 29px;
+}
+
+.highlight {
+  color: blue;
+}
+
+/* Footer */
+.footer {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.footer .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.footer .text-muted {
+  color: #bbb;
+}
+
+/* Navbar */
+.navbar {
+  margin-bottom: 20px;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #fff !important;
+}
+
+/* Custom Button Styles for Navbar */
+.navbar-nav .nav-link {
+  color: #fff !important;
+  transition: color 0.3s, background-color 0.3s;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin: 0 5px;
+  background-color: #007bff; /* Background color for buttons */
+}
+
+.navbar-nav .nav-link:hover {
+  color: #fff !important;
+  background-color: #0056b3; /* Hover background color */
+  transform: scale(1.05); /* Slightly increase size on hover */
+  text-decoration: none; /* Remove underline */
+}
+
+/* Button Interactivity */
+button[type="submit"] {
+  padding: 10px 15px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Modal Styles */
+.modal .modal-content {
+  border-radius: 10px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.modal-header .close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #000;
+}
+
+.modal-body img {
+  max-width: 100%;
+  height: auto;
+}

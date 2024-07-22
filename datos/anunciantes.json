@@ -1,0 +1,29 @@
+[
+    {
+      "id": 1,
+      "nombre": "Anunciante 1",
+      "ofertaPuja": 0.10,
+      "anuncios": [
+        {
+          "id": 101,
+          "imagen": "https://live.staticflickr.com/2901/33562145560_a1e2a8b5e0_h.jpg",
+          "enlace": "https://www.coca-colaentuhogar.com/",
+          "clics": 0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Anunciante 2",
+      "ofertaPuja": 0.15,
+      "anuncios": [
+        {
+          "id": 102,
+          "imagen": "codigo/imagenes/banner1.jpg",
+          "enlace": "http://otroejemplo.com",
+          "clics": 0
+        }
+      ]
+    }
+  ]
+  

@@ -1,0 +1,119 @@
+/* styles.css */
+
+/* General */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Container */
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Labels */
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Inputs */
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Button */
+button[type="submit"] {
+    padding: 10px 15px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Ad Banner */
+.ad-banner {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+}
+
+.ad-banner img {
+    max-width: 100%;
+    height: auto;
+}
+
+.ad-text {
+    position: absolute;
+    top: 50%; /* Centrar verticalmente */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translate(-50%, -50%); /* Ajustar la posición */
+    font-size: 33px; /* Aumentar tamaño de texto */
+    font-family: 'Arial black';
+    color: white;
+    animation: colorChange 1s infinite alternate;
+    pointer-events: none; /* Permitir clics a través del texto */
+}
+
+@keyframes colorChange {
+    0% { color: yellow; }
+    100% { color: red; }
+}
+
+.ad-caption {
+    text-align: center;
+    color: blue;
+    text-decoration: underline;
+    margin-top: 10px;
+}
+
+.additional-links {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.additional-links a {
+    display: block;
+    margin: 5px 0; /* Espacio entre los enlaces */
+    color: blue;
+    text-decoration: underline;
+}
+
+.additional-links a:first-child {
+    margin-bottom: 15px; /* Más espacio debajo del primer enlace */
+}

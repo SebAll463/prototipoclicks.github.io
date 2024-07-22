@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style4.css">
+  <title>Servicios</title>
+  <style>
+    .highlight {
+      color: red; /* Puedes ajustar el color a tu preferencia */
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Portal Cautivo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link btn-custom" href="principal.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn-custom" href="servicios.html">Servicios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn-custom" href="contacto.html">Contacto</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="services-header">
+    <h2>Servicios</h2>
+    <p>Ofrecemos los siguientes servicios</p>
+  </div>
+
+  <div class="services-container">
+    <div class="service-item">
+      <img src="imagenes/100.jpg" alt="Servicio 1" class="service-image">
+      <p class="service-text">Pagos y tu plan actual</p>
+    </div>
+    <div class="service-item">
+      <img src="imagenes/44.jpeg" alt="Servicio 2" class="service-image">
+      <p class="service-text">Cambia tu plan de internet</p>
+    </div>
+    <div class="service-item">
+      <img src="imagenes/60.jpeg" alt="Servicio 3" class="service-image">
+      <p class="service-text">Soporte técnico para red Wi-Fi</p>
+    </div>
+    <div class="service-item">
+      <img src="imagenes/98.jpeg" alt="Servicio 4" class="service-image">
+      <p class="service-text">Instalación y mantenimiento de equipos</p>
+    </div>
+  </div>
+  
+  <footer class="footer">
+    <div class="container">
+      <span class="text-muted">© 2024 Portal Cautivo. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <!-- Modal de Publicidad -->
+  <div class="modal fade" id="adModal" tabindex="-1" role="dialog" aria-labelledby="adModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="adModalLabel">Publicidad</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <a id="modal-ad-link" href="#" target="_blank" onclick="registrarClic(event)">
+            <img id="modal-ad-image" src="#" alt="Banner de Anuncio" class="img-fluid">
+            <div class="ad-text">Haz click aquí!!!</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    const ads = [
+      {
+        id: 1,
+        src: "imagenes/10.jpg",
+        link: "redirecion.html"
+      },
+      {
+        id: 2,
+        src: "imagenes/7.jpg",
+        link: "redirecion.html"
+      },
+      {
+        id: 3,
+        src: "imagenes/11.jpeg",
+        link: "redirecion.html"
+      }
+    ];
+
+    let currentAdIndex = 0;
+
+    function showAd() {
+      const ad = ads[currentAdIndex];
+      document.getElementById('modal-ad-image').src = ad.src;
+      document.getElementById('modal-ad-link').href = ad.link;
+      document.getElementById('modal-ad-link').setAttribute('data-ad-id', ad.id); // Asignar ID del anuncio
+
+      currentAdIndex = (currentAdIndex + 1) % ads.length; // Cambiar al siguiente anuncio
+    }
+
+    // Mostrar un anuncio al cargar y luego cada 5 segundos
+    showAd();
+    setInterval(showAd, 5000); // Cambiar cada 5 segundos
+
+    // Mostrar el modal de publicidad al cargar la página
+    $(document).ready(function() {
+      $('#adModal').modal('show');
+    });
+
+    // Cambiar el color del texto "Haz click aquí!!!" de forma intermitente
+    setInterval(function() {
+      $('.ad-text').toggleClass('highlight');
+    }, 1000); // Cambiar cada 1 segundo
+
+    // Registrar clic en el anuncio
+    function registrarClic(event) {
+      event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
+      const adId = event.currentTarget.getAttribute('data-ad-id'); // Obtener el adId del atributo data-ad-id
+      const adLink = event.currentTarget.href; // Obtener el enlace del anuncio
+
+      fetch('/api/click', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ adId: adId })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.message); // Opcional: Mostrar mensaje de éxito
+        // Redirigir después de registrar el clic
+        window.location.href = adLink;
+      })
+      .catch(error => {
+        console.error('Error al registrar clic:', error);
+        // Redirigir a pesar del error para no bloquear la navegación
+        window.location.href = adLink;
+      });
+    }
+  </script>
+</body>
+</html>

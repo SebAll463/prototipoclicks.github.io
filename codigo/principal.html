@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style1.css">
+  <title>Bienvenido</title>
+  <style>
+    .ad-banner {
+      text-align: center;
+    }
+    .ad-banner img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .ad-text {
+      font-size: 2em;
+      font-family: Arial black;
+      margin-top: 10px;
+      color: rgb(67, 21, 233);
+      font-weight: bold;
+      text-align: center;
+    }
+    .highlight {
+      color: red;
+    }
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Portal Cautivo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link btn-custom" href="principal.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn-custom" href="servicios.html">Servicios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn-custom" href="contacto.html">Contacto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn-custom" href="../admin.html">Admin</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="container">
+    <h2>Bienvenido</h2>
+    <p>Gracias por iniciar sesión</p>
+    <p><b>Ya accediste a nuestra red de internet y ahora también puedes ver nuestros servicios en la sección de "servicios"</b></p>
+    
+    <!-- Nuevo botón para redirigir al login -->
+    <div class="text-center mb-4">
+      <a href="../index.html" class="btn btn-primary">Ir a Login</a>
+    </div>
+    
+    <!-- Anuncios Personalizados en fila -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="ad-banner">
+          <a id="ad-link-1" href="redirecion.html" target="_blank" data-ad-id="1" onclick="registrarClic(event)">
+            <img id="ad-image-1" src="imagenes/5.jpg" alt="Banner de Anuncio">
+            <div class="ad-text">Haz click aquí!!!</div>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="ad-banner">
+          <a id="ad-link-2" href="redirecion.html" target="_blank" data-ad-id="2" onclick="registrarClic(event)">
+            <img id="ad-image-2" src="imagenes/2.jpg" alt="Banner de Anuncio">
+            <div class="ad-text">Haz click aquí!!!</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+    <div class="container">
+      <span class="text-muted">© 2024 Portal Cautivo. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <!-- Modal de Publicidad -->
+  <div class="modal" id="adModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Publicidad</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <a id="modal-ad-link" href="redirecion.html" target="_blank" data-ad-id="3" onclick="registrarClic(event)">
+            <img id="modal-ad-image" src="imagenes/10.jpg" alt="Banner de Anuncio" class="img-fluid">
+            <div class="ad-text">Haz click aquí!!!</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    const ads = [
+      {
+        id: 1,
+        src: "imagenes/3.jpg",
+        link: "redirecion.html"
+      },
+      {
+        id: 2,
+        src: "imagenes/7.jpg",
+        link: "redirecion.html"
+      },
+      {
+        id: 3,
+        src: "imagenes/9.jpg",
+        link: "redirecion.html"
+      }
+    ];
+
+    let currentAdIndex = 0;
+
+    function showAd() {
+      const ad = ads[currentAdIndex];
+      document.getElementById('ad-image-1').src = ad.src;
+      document.getElementById('ad-link-1').href = ad.link;
+      document.getElementById('ad-link-1').setAttribute('data-ad-id', ad.id);
+      
+      document.getElementById('ad-image-2').src = ad.src;
+      document.getElementById('ad-link-2').href = ad.link;
+      document.getElementById('ad-link-2').setAttribute('data-ad-id', ad.id);
+
+      document.getElementById('modal-ad-image').src = ad.src;
+      document.getElementById('modal-ad-link').href = ad.link;
+      document.getElementById('modal-ad-link').setAttribute('data-ad-id', ad.id);
+
+      currentAdIndex = (currentAdIndex + 1) % ads.length; // Cambia al siguiente anuncio
+    }
+
+    // Mostrar un anuncio al cargar y luego cada 5 segundos
+    showAd();
+    setInterval(showAd, 5000); // Cambiar cada 5 segundos
+
+    // Mostrar el modal de publicidad al cargar la página
+    $(document).ready(function() {
+      $('#adModal').modal('show');
+    });
+
+    // Cambiar el color del texto "Haz click aquí!!!" de forma intermitente
+    setInterval(function() {
+      $('.ad-text').toggleClass('highlight');
+    }, 1000); // Cambiar cada 1 segundo
+
+    function registrarClic(event) {
+      event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
+
+      const adId = event.currentTarget.getAttribute('data-ad-id'); // Obtener el adId del atributo data-ad-id
+      const adLink = event.currentTarget.href; // Obtener el enlace del anuncio
+
+      fetch('/api/click', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ adId }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Clic registrado con éxito:', data);
+        // Redirigir después de registrar el clic
+        window.location.href = adLink;
+      })
+      .catch((error) => {
+        console.error('Error al registrar clic:', error);
+        // Redirigir a pesar del error para no bloquear la navegación
+        window.location.href = adLink;
+      });
+    }
+  </script>
+</body>
+</html>

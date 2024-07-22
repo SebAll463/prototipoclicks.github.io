@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="codigo/adminstyle.css">
+  <title>Panel de Administración</title>
+  <style>
+    .clicks-stats {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      margin-bottom: 20px;
+    }
+    .money-generated {
+      font-size: 1.2em;
+      color: #28a745;
+      margin-top: 20px;
+    }
+    .clicks-table {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Panel de Admin</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="admin.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#usuarios">Usuarios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#anuncios">Anuncios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#estadisticas">Estadísticas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="codigo/principal.html">Portal cautivo</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-5 pt-5">
+    <h2 class="mt-4">Panel de Administración</h2>
+
+    <section id="usuarios" class="mt-5">
+      <h3>Gestión de Usuarios</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="usuarios-list">
+          <!-- Usuarios se cargarán aquí dinámicamente -->
+        </tbody>
+      </table>
+      <button class="btn btn-primary" onclick="agregarUsuario()">Agregar Usuario</button>
+    </section>
+
+    <section id="anuncios" class="mt-5">
+      <h3>Gestión de Anuncios</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Imagen</th>
+            <th>Enlace</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="anuncios-list">
+          <!-- Anuncios se cargarán aquí dinámicamente -->
+        </tbody>
+      </table>
+      <button class="btn btn-primary" onclick="agregarAnuncio()">Agregar Anuncio</button>
+    </section>
+
+    <section id="estadisticas" class="mt-5">
+      <h3>Estadísticas de Clicks y pujas generadas por los anuncios</h3>
+      <div class="clicks-stats">
+        <table class="table table-bordered clicks-table">
+          <thead>
+            <tr>
+              <th>ID Anuncio</th>
+              <th>Clicks</th>
+              <th>Dinero que el anuncio ha generado</th>
+            </tr>
+          </thead>
+          <tbody id="estadisticas-clics">
+            <!-- Estadísticas se cargarán aquí dinámicamente -->
+          </tbody>
+        </table>
+        <div class="money-generated">
+          <h4>Total dinero generado:</h4>
+          <p id="dinero-generado">$0.00</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="codigo/adminjava.js"></script>
+  <script>
+    // Función para cargar las estadísticas de clics
+    function cargarEstadisticas() {
+      $.getJSON('/api/clicks', function(clics) {
+        const estadisticasClics = $('#estadisticas-clics');
+        let totalDinero = 0;
+        estadisticasClics.empty();
+        for (const [id, cantidad] of Object.entries(clics)) {
+          const dineroPorClic = 0.05; // Dinero generado por clic
+          const dineroGenerado = cantidad * dineroPorClic;
+          totalDinero += dineroGenerado;
+          estadisticasClics.append(`
+            <tr>
+              <td>${id}</td>
+              <td>${cantidad}</td>
+              <td>$${dineroGenerado.toFixed(2)}</td>
+            </tr>
+          `);
+        }
+        $('#dinero-generado').text(`$${totalDinero.toFixed(2)}`);
+      });
+    }
+
+    // Cargar los datos cuando la página está lista
+    $(document).ready(function() {
+      cargarUsuarios();  // Asegúrate de tener estas funciones definidas en adminjava.js
+      cargarAnuncios();  // Asegúrate de tener estas funciones definidas en adminjava.js
+      cargarEstadisticas();
+    });
+  </script>
+</body>
+</html>

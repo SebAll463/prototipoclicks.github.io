@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style2.css">
+  <title>Registrarse</title>
+</head>
+<body>
+  <div class="main-container">
+    <div class="ad-sidebar">
+      <a id="ad-link-left" href="" target="_blank" data-ad-id="" onclick="registrarClic(event)">
+        <img id="ad-image-left" src="" alt="Banner de Anuncio" class="ad-image">
+        <div class="ad-text blink">Haz click aquí!!!</div>
+      </a>
+    </div>
+
+    <div class="container">
+      <h2>Registrarse</h2>
+      <form id="register-form">
+        <div class="form-group">
+          <label for="username">Nombre de Usuario:</label>
+          <input type="text" class="form-control" id="username" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Correo Electrónico:</label>
+          <input type="email" class="form-control" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña:</label>
+          <input type="password" class="form-control" id="password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">Confirmar Contraseña:</label>
+          <input type="password" class="form-control" id="confirm-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+      </form>
+      
+      <div class="additional-links">
+        <a href="../index.html">¿Ya tienes cuenta? Inicia sesión aquí</a>
+      </div>
+    </div>
+
+    <div class="ad-sidebar">
+      <a id="ad-link-right" href="" target="_blank" data-ad-id="" onclick="registrarClic(event)">
+        <img id="ad-image-right" src="" alt="Banner de Anuncio" class="ad-image">
+        <div class="ad-text blink">Haz click aquí!!!</div>
+      </a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2024 Portal Cautivo</p>
+  </footer>
+
+  <script>
+    const ads = [
+      {
+        src: "imagenes/6.jpg",
+        link: "redirecion.html"
+      },
+      {
+        src: "imagenes/8.jpg",
+        link: "redirecion.html"
+      },
+      {
+        src: "imagenes/3.jpg",
+        link: "redirecion.html"
+      }
+    ];
+
+    let currentAdIndex = 0;
+
+    function showAd() {
+      const ad = ads[currentAdIndex];
+      document.getElementById('ad-image-left').src = ad.src;
+      document.getElementById('ad-link-left').href = ad.link;
+      document.getElementById('ad-link-left').setAttribute('data-ad-id', currentAdIndex + 1); // Guardar adId
+      document.getElementById('ad-image-right').src = ad.src;
+      document.getElementById('ad-link-right').href = ad.link;
+      document.getElementById('ad-link-right').setAttribute('data-ad-id', currentAdIndex + 1); // Guardar adId
+
+      currentAdIndex = (currentAdIndex + 1) % ads.length; // Cambia al siguiente anuncio
+    }
+
+    // Mostrar un anuncio al cargar y luego cada 3 segundos
+    showAd();
+    setInterval(showAd, 3000); // Cambiar cada 3 segundos
+
+    document.getElementById('register-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+
+      if (password !== confirmPassword) {
+        alert('Las contraseñas no coinciden.');
+        return;
+      }
+
+      fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('¡Registro exitoso!');
+          window.location.href = '../index.html'; // Redirigir a la página de inicio de sesión
+        } else {
+          alert('Error en el registro: ' + (data.message || 'Desconocido'));
+        }
+      })
+      .catch((error) => {
+        console.error('Error al registrar:', error);
+        alert('Error al registrar: ' + error.message);
+      });
+    });
+
+    function registrarClic(event) {
+      event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
+
+      const adId = event.currentTarget.getAttribute('data-ad-id'); // Obtener el adId del atributo data-ad-id
+      const adLink = event.currentTarget.href; // Obtener el enlace del anuncio
+
+      fetch('/api/click', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ adId }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Clic registrado con éxito:', data);
+        // Redirigir después de registrar el clic
+        window.location.href = adLink;
+      })
+      .catch((error) => {
+        console.error('Error al registrar clic:', error);
+        // Redirigir a pesar del error para no bloquear la navegación
+        window.location.href = adLink;
+      });
+    }
+  </script>
+</body>
+</html>
